@@ -56,9 +56,14 @@ jobs:
           cd simple_live_tv_app
           flutter build apk --release --split-per-abi
     
-      #上传APK至Artifacts
+      # 调试：列出输出目录，确保文件存在（如果不存在，上传会失败）
+      - name: List APK outputs
+        run: |
+          ls -la simple_live_tv_app/build/app/outputs/flutter-apk || true
+
+      #上传APK至Artifacts（已升级到 v4）
       - name: Upload APK to Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: android_tv
           path: |
